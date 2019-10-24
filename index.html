@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>Relatório Samba Server</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/fontAwesome.css">
+        <link rel="stylesheet" href="css/tooplate-style.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        
+
+        <section class="first-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-content">
+                  <h2>Relatório Samba Server</h2>
+                  <div class="line-dec"></div>
+                  <span>Tauana Auler &amp; Tobias Trein</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class="right-text col-md-8">
+                  <h4><b>Instalando o Samba Server:</b></h4>
+                  <p style="color: black;">Primeiro, no terminal, realizamos atualização do apt e instalação do Samba Server com os seguintes comandos respectivamente:<br>
+                    &emsp;<i style="color: gray;">sudo apt update</i><br>
+                    &emsp;<i style="color: gray;">sudo apt install samba</i><br><br>
+
+                  Para testar se a instalação foi concluída com sucesso use o comando:<br>
+                    &emsp;<i style="color: gray;">whereis samba</i><br><br>
+
+                  Se estiver tudo certo retornará algo parecido com:<br>
+                    &emsp;<i style="color: gray;">samba: /usr/sbin/samba /usr/lib/samba /etc/samba /usr/share/samba /usr/share/man/man7/samba.7.gz /usr/share/man/man8/samba.8.gz</i></p><br>
+
+                    <h4><b>Configurando o Samba Server:</b></h4>
+                    <p style="color: black;">Nós já criamos anteriormente as pastas <u>gerencia</u>, <u>sistemas</u> e <u>util</u> e agora entraremos na configuração do Samba para definir as permissões quanto a elas.<br>
+                    Entre na configuração com:<br>
+                      &emsp;<i style="color: gray;">sudo nano /etc/samba/smb.conf</i><br>
+                    Ao final do arquivo que abrir acrescentamos: as seguintes linhas:<br>
+                      <i style="color: gray;">
+                        [home]<br>
+                        &emsp;    path = /home <br>
+                        &emsp;    read only = no <br>
+                        &emsp;   browsable = yes <br> 
+                        [sistemas] <br>
+                        &emsp;    path = /sistemas <br>
+                        &emsp;    read only = no <br>
+                        &emsp;    browsable = yes <br>
+                        [util] <br>
+                        &emsp;    path = /util <br>
+                        &emsp;    read only = no <br>
+                        &emsp;    browsable = yes <br>
+                        [gerencia] <br>
+                        &emsp;    path = /gerencia <br>
+                        &emsp;    read only = no <br>
+                        &emsp;    browsable = yes <br><br>                   
+                      </i>
+
+                      Ao sair do editor usamos para reiniciar o samba o comando:<br>
+                      &emsp;<i style="color: gray;">sudo service smbd restart</i><br><br>
+
+                    O Samba não utiliza a mesma senha que a máquina, então é necessário definir uma usando o comando:<br>
+                      &emsp;<i style="color: gray;">sudo smbpasswd -a username</i><br><br>
+
+                    O servidor já está funcionando, podendo ser conferido com o comando:<br>
+                      &emsp;<i style="color: gray;">sudo service smbd status</i><br><br>
+
+                    Para acessá-lo, digite o caminho no explorador de arquivos do SO:<br>
+                      &emsp;<i style="color: gray;">smb://ip-do-servidor/pasta</i><br><br>
+                      
+                    No nosso caso, podemos acessar, por exemplo:<br>
+                      &emsp;<i style="color: gray;">smb://.10.0.2.15/sistemas</i><br><br>
+
+                    </p><br>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p>Técnico em informática Integrado ao Ensino Médio | 4º ano</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
